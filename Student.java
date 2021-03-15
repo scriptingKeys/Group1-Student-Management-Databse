@@ -9,8 +9,8 @@ public class Student{
     private long phoneNum;
     private String email;
     private int year;
-    //private String[] classArray = {};
     private ArrayList<String> classes = new ArrayList<>();
+    private ArrayList<String> extra = new ArrayList<>();
 
     private String name;
     Scanner stdin = new Scanner(System.in);
@@ -22,11 +22,12 @@ public class Student{
         Scanner stdin =new Scanner(System.in);
         System.out.println ("Enter student ID:");
         studentID = stdin.nextLong();
-        stdin.nextLine();
+        
 
         System.out.println ("Enter student first name + last name:  ");
         name = stdin.nextLine();
-
+        stdin.nextline();
+        
         System.out.println ("Enter student's year of study:");
         year = stdin.nextInt();
 
@@ -40,16 +41,17 @@ public class Student{
         YearofB = stdin.nextInt();
 
         System.out.println ("Enter Student's Address:");
-        Adress = stdin.nextLine();
-        stdin.nextLine();
+        Adress = stdin.next();
+        
 
         System.out.println ("Enter student's phone number:");
         phoneNum = stdin.nextLong();
 
         System.out.println ("Enter student's email");
-        email = stdin.nextLine();
-        stdin.nextLine();
+        email = stdin.next();
+        
     }
+    
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // Set methods
 
@@ -72,8 +74,9 @@ public class Student{
         return email;
     }
 
-    public ArrayList<String>getClasses(){
-       return classes;
+    public void getClasses(){
+       System.out.println(classes);
+        }
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void setClasses(){
@@ -82,10 +85,11 @@ public class Student{
         int count = 0;
 
         if (year == 1){
-            for(; count < take; count++) {
+            while(count < take) {
                 System.out.println("The following first year courses are available: COMP 120, COMP 125, COMP 150, CMNS 152, COMP 155");
                 course = stdin.next();
                 classes.add(course);
+                count++;
             }
         }
         if (year == 2){
@@ -113,7 +117,40 @@ public class Student{
             }
         }
     }
-    /////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void addCourse(){
+        
+        System.out.println("Would you like to add a course? y/n");
+            String ans = stdin.next();
+                while (ans.equals("y")){
+                    System.out.println ("Enter the class you want to add!");
+                    classes.add(stdin.next());
+                    System.out.println("Would you still like to add a course? y/n");
+                    ans = stdin.next();
+            }
+        
+    }
+    public void removeCourse(){
+        System.out.println("would you like to remove a course? y/n");
+        ans = stdin.next();
+        
+        if (ans.equals("y")  && classes.size() != 0  ){
+
+           while (ans.equals("y")){
+            System.out.println("Current courses: " + classes + "\n Pick a course you would ike to remove (Starting at index 0)");
+            classes.remove(std.nextInt());
+            System.out.println("would you like to remove another class?");
+            ans = stdin.nextLine();
+           }
+        
+        else{break;}   
+
+        }
+        else{System.out.println("You have no courses to remove!"); break;}
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+public 
+/////////////////////////////////////////////////////////////////////////////////////////////////
     // Main function
     public static void main(String[] args){
 
@@ -124,3 +161,6 @@ public class Student{
         Student student1 = new Student();
     }
 }
+
+
+
