@@ -17,18 +17,18 @@ public class Student {
 
     public Student() {
         Scanner stdin = new Scanner(System.in);
-        /*System.out.println("Enter student ID:");
+        System.out.println("Enter student ID:");
         studentID = stdin.nextLong();
 
 
         System.out.println("Enter student first name + last name:  ");
         name = stdin.nextLine();
-        stdin.nextLine();*/
+        stdin.nextLine();
 
         System.out.print("Enter student's year of study:");
         year = stdin.nextInt();
 
-        /*System.out.println("Enter student day of birth:");
+        System.out.println("Enter student day of birth:");
         DayofB = stdin.nextInt();
 
         System.out.println("Enter student month of birth:");
@@ -45,7 +45,7 @@ public class Student {
         phoneNum = stdin.nextLong();
 
         System.out.println("Enter student's email");
-        email = stdin.next();*/
+        email = stdin.next();
 
         System.out.print("Would you like to participate in extracurricular activities? (y/n. Enter nothing to exit): ");
         String x = stdin.next();
