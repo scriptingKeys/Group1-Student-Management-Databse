@@ -7,7 +7,7 @@ public class Student {
     private String name;
     private long studentID;
     private int DayofB, MonthofB, YearofB;
-    private String Address;
+    private String address;
     private long phoneNum;
     private String email;
     private int year;
@@ -17,35 +17,37 @@ public class Student {
 
     public Student() {
         Scanner stdin = new Scanner(System.in);
-        System.out.println("Enter student ID:");
+        /*System.out.println("Enter student ID:");
         studentID = stdin.nextLong();
 
 
-        System.out.println("Enter student first name + last name:  ");
+        System.out.print("Enter student first name + last name:  ");
         name = stdin.nextLine();
-        stdin.nextLine();
+        stdin.nextLine();*/
 
         System.out.print("Enter student's year of study:");
         year = stdin.nextInt();
 
-        System.out.println("Enter student day of birth:");
+        System.out.print("Enter student day of birth: ");
         DayofB = stdin.nextInt();
 
-        System.out.println("Enter student month of birth:");
+        System.out.print("Enter student month of birth: ");
         MonthofB = stdin.nextInt();
 
-        System.out.println("Enter student year of birth");
+        System.out.print("Enter student year of birth: ");
         YearofB = stdin.nextInt();
 
-        System.out.println("Enter Student's Address:");
-        Adress = stdin.next();
+        System.out.print("Enter Student's Address: ");
+        address = stdin.next();
 
 
-        System.out.println("Enter student's phone number:");
+        System.out.print("Enter student's phone number: ");
         phoneNum = stdin.nextLong();
 
-        System.out.println("Enter student's email");
+        System.out.print("Enter student's email: ");
         email = stdin.next();
+        
+        
 
         System.out.print("Would you like to participate in extracurricular activities? (y/n. Enter nothing to exit): ");
         String x = stdin.next();
@@ -71,7 +73,7 @@ public class Student {
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public long getPhone() {
@@ -138,7 +140,7 @@ public class Student {
 
     public void add() {
         AddRemove addRemove = new AddRemove(this);
-        addRemove.removeCourse();
+        addRemove.addCourse();
     }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
