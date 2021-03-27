@@ -1,14 +1,10 @@
 public class Main {
     public static void main(String[] args){
-        Student s = new Student();
+        Student s1 = new Student();
+        System.out.println(s1.getClasses());
 
-        s.setClasses();
+        s1.remove();
 
-        System.out.println(s.getClasses());
-
-        //s.add();
-        s.remove();
-
-        System.out.println(s.getClasses());
+        System.out.println(s1.getClasses());
     }
 }
