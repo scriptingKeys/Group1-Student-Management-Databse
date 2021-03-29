@@ -1,48 +1,36 @@
 import java.util.*;
 
 public class AddRemove {
-    private Scanner stdin = new Scanner(System.in);
-    private Student student;
-    private ArrayList<String> courses;
+    private static Scanner stdin = new Scanner(System.in);
 
-    public AddRemove(Student student){
-        this.student = student;
-        courses = this.student.getClasses();
-    }
+    public static ArrayList<String> addCourse(SchoolMember s) {
+        ArrayList<String> courses = s.getClasses();
 
-    public void printClasses() {
-        System.out.println(courses);
-    }
-
-    public ArrayList<String> addCourse() {
-        System.out.print("Would you like to add a course? (y/n): ");
-        String ans = stdin.next();
-        while (ans.equals("y")){
-            System.out.print("Enter the class you want to add: ");
+        String ans;
+        do {
+            System.out.print("Enter course you would like to add: ");
             courses.add(stdin.next());
             System.out.print("Would you still like to add a course? (y/n): ");
             ans = stdin.next();
-        }
+            if(ans.equals("n"))
+                break;
+        } while(ans.equals("y"));
 
         return courses;
     }
 
-    public ArrayList<String> removeCourse(){
-        System.out.print("Would you like to remove a course? (y/n): ");
-        String ans = stdin.next();
+    public static ArrayList<String> removeCourse(SchoolMember s){
+        ArrayList<String> courses = s.getClasses();
 
-        if (ans.equals("y") && courses.size() != 0 ){
-            while (ans.equals("y")){
-                System.out.println("Current courses: " + courses);
-                System.out.print("Pick a course you would ike to remove (Starting at index 0): ");
-                courses.remove(stdin.nextInt());
-                System.out.print("Would you like to remove another class? (y/n): ");
-                ans = stdin.next();
-            }
-        }
-        else {
-            System.out.println("You have no courses to remove!");
-        }
+        String ans;
+        do {
+            System.out.print("Enter course you would like to remove: ");
+            courses.remove(stdin.nextInt());
+            System.out.println("Would you still like to remove a course? (y/n)");
+            ans = stdin.next();
+            if(ans.equals("n"))
+                break;
+        } while(ans.equals("y"));
 
         return courses;
     }
