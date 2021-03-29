@@ -1,73 +1,59 @@
 import java.util.*;
-public class Student {
+public class Student extends SchoolMember {
     Scanner stdin = new Scanner(System.in);
 
-    // Instance variables go here: students ID number, Name, Address, Phone number, email
-
     private String name, email, address;
-    private int DayofB, MonthofB, YearofB;
+    private int dayofB, yearofB;
+    private String monthofB;
     private long phoneNum;
     private int year;
     private ArrayList<String> classes = new ArrayList<>();
 
     private long studentID;
-    private static long studentNumber = 30000;
+    private static long studentNumber = 1000000000;
 
     public Student() {
         Scanner stdin = new Scanner(System.in);
-        /*System.out.println("Enter student ID:");
-        studentID = stdin.nextLong();
 
-        System.out.print("Enter student first name + last name:  ");
+        /*
+        System.out.print("Enter student's first name + last name: ");
         name = stdin.nextLine();
-        stdin.nextLine();
 
-        System.out.print("Enter student day of birth: ");
-        DayofB = stdin.nextInt();
-
-        System.out.print("Enter student month of birth: ");
-        MonthofB = stdin.nextInt();
-
-        System.out.print("Enter student year of birth: ");
-        YearofB = stdin.nextInt();
-
-        System.out.print("Enter Student's Address: ");
-        address = stdin.next();
-
-        System.out.print("Enter student's phone number: ");
-        phoneNum = stdin.nextLong();
+        System.out.print("Enter student's address: ");
+        address = stdin.nextLine();
 
         System.out.print("Enter student's email: ");
         email = stdin.next();
 
+        System.out.print("Enter student's month of birth: ");
+        monthofB = stdin.next();
+
+        System.out.print("Enter student's day of birth: ");
+        dayofB = stdin.nextInt();
+
+        System.out.print("Enter student's year of birth: ");
+        yearofB = stdin.nextInt();
+
+        System.out.print("Enter student's phone number: ");
+        phoneNum = stdin.nextLong();
+
         */
 
-        System.out.print("Enter student's year of study:");
+        System.out.print("Enter student's year of study: ");
         year = stdin.nextInt();
 
-        System.out.print("Would you like to participate in extracurricular activities? (y/n). (Press enter to exit): ");
-        String x = stdin.next();
-        if (x.equals("y")) {
-            classes.addAll(new ExtraCurricular().getSelectedActivities());
+        System.out.print("Would you like to participate in extracurricular activities? (y/n): ");
+        if (stdin.next().equals("y")) {
+            classes.addAll(ExtraCurricular.addExtraCurricular(this));
         }
 
         setClasses();
-
         setStudentID();
-    }
-
-    private void setStudentID() {
-        studentNumber++;
-        studentID = studentNumber;
-    }
-
-    public long getStudentID() {
-        return studentID;
     }
 
 
     private void setClasses() {
-        System.out.println("How many courses do you want to take");
+        System.out.print("How many courses do you want to take: ");
         int take = stdin.nextInt();
         int count = 0;
         String course;
@@ -110,36 +96,64 @@ public class Student {
         }
     }
 
-    public void remove() {
-        classes = new AddRemove(this).removeCourse();
+
+    /*public void addClass() {
+        classes = AddRemove.addCourse(this);
     }
 
-    public void add() {
-        classes = new AddRemove(this).addCourse();
+    public void removeClass() {
+        classes = AddRemove.removeCourse(this);
+    }
+
+     */
+
+    private void setStudentID() {
+        studentNumber++;
+        studentID = studentNumber;
+    }
+
+    public ArrayList<String> getClasses() {
+        return classes;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getStudentDOB() {
-        return "DOB format: MMDDYYYY\n" + MonthofB + " " + DayofB + " " + YearofB;
-    }
-
     public String getAddress() {
         return address;
     }
 
-    public long getPhone() {
-        return phoneNum;
-    }
-
-    public String email() {
+    public String getEmail() {
         return email;
     }
 
-    public ArrayList<String> getClasses() {
-        return classes;
+    public long getPhoneNum() {
+        return phoneNum;
+    }
+
+    public String getStudentDOB() {
+        return monthofB + " " + dayofB + " " + yearofB;
+    }
+
+    public long getStudentID() {
+        return studentID;
+    }
+
+    public String toString() {
+        /*return "Name: " + name +
+                "\nAddress: " + address +
+                "\nEmail: " + email +
+                "\nPhone: " + phoneNum +
+                "\nDOB: " + monthofB + " " +  dayofB + " " + yearofB +
+                "\nYear: " + year +
+                "\nStudent ID: " + studentID +
+                "\nClasses: " + classes;
+
+         */
+
+        return this.getClass().getName() + "[" + name + "," + address + ", " + email + ", " + phoneNum + ", " + monthofB +  ", " + dayofB + ", " + yearofB +
+                ", " + year + ", " + studentID + "]";
     }
 }
 
