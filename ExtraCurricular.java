@@ -1,29 +1,34 @@
 import java.util.*;
 
+/**
+ * Can add extracurricular activities to Student
+ */
 public class ExtraCurricular {
-    private String[] activities = {
-      "Art club", "Book club", "Soccer team", "School Newspaper"
-    };
-    private ArrayList<String> selectedActivities = new ArrayList<String>();
+    private static String[] activities = {"Art club", "Book club", "School varsity", "School newspaper"};
 
-    private Scanner stdin = new Scanner(System.in);
+    /**
+     * Adds a list of extracurricular activities the Student selected
+     * @return an ArrayList of type String of extracurricular activities.
+     */
+    public static ArrayList<String> addExtraCurricular() {
+        Scanner stdin = new Scanner(System.in);
+        ArrayList<String> selectedActivities = new ArrayList<>();
 
-    public ExtraCurricular() {
         System.out.println("Available activities: ");
         for(String activity : activities) {
             System.out.println(activity);
         }
-        System.out.println("Select the ones you would like to join (Enter nothing to exit): ");
+
+        System.out.println("Select the ones you would like to join: ");
+
         while(true) {
-            System.out.print("Activity: ");
+            System.out.print("Activity (Press enter to exit): ");
             String select = stdin.nextLine();
             if(select.equals(""))
                 break;
             selectedActivities.add(select);
         }
-    }
 
-    public ArrayList<String> getSelectedActivities() {
         return selectedActivities;
     }
 }
