@@ -1,73 +1,76 @@
 import java.util.*;
-public class Student {
-    Scanner stdin = new Scanner(System.in);
 
-    // Instance variables go here: students ID number, Name, Address, Phone number, email
+/**
+ * Represents a Student
+ */
+public class Student extends SchoolMember {
 
     private String name, email, address;
-    private int DayofB, MonthofB, YearofB;
+    private int dayofB, monthofB, yearofB;
     private long phoneNum;
     private int year;
-    private ArrayList<String> classes = new ArrayList<>();
+    private ArrayList<String> classesTaking = new ArrayList<>();
 
+    /**
+     * A number unique for each student instance.
+     */
     private long studentID;
-    private static long studentNumber = 30000;
+    /**
+     * Is the counter to determine the studentID
+     */
+    private static long studentNumber = 1000000000;
 
+    private static int numberOfStudents;
+
+    /**
+     * Initializes the necessary information of a student. Asks the name, address, email, DOB, phone number, and year of study.
+     * Calls the static method addExtraCurricular from the ExtraCurricular class if the student wants to add extracurricular activities.
+     * Calls the setClasses() and setStudentID() respectively.
+     */
     public Student() {
         Scanner stdin = new Scanner(System.in);
-        /*System.out.println("Enter student ID:");
-        studentID = stdin.nextLong();
 
-        System.out.print("Enter student first name + last name:  ");
+        System.out.print("Enter student's first name + last name: ");
         name = stdin.nextLine();
-        stdin.nextLine();
 
-        System.out.print("Enter student day of birth: ");
-        DayofB = stdin.nextInt();
-
-        System.out.print("Enter student month of birth: ");
-        MonthofB = stdin.nextInt();
-
-        System.out.print("Enter student year of birth: ");
-        YearofB = stdin.nextInt();
-
-        System.out.print("Enter Student's Address: ");
-        address = stdin.next();
-
-        System.out.print("Enter student's phone number: ");
-        phoneNum = stdin.nextLong();
+        System.out.print("Enter student's address: ");
+        address = stdin.nextLine();
 
         System.out.print("Enter student's email: ");
         email = stdin.next();
 
-        */
+        System.out.print("Enter student's day of birth (DD): ");
+        dayofB = stdin.nextInt();
 
-        System.out.print("Enter student's year of study:");
+        System.out.print("Enter student's month of birth (MM): ");
+        monthofB = stdin.nextInt();
+
+        System.out.print("Enter student's year of birth: (YYYY)");
+        yearofB = stdin.nextInt();
+
+        System.out.print("Enter student's phone number: ");
+        phoneNum = stdin.nextLong();
+
+        System.out.print("Enter student's year of study: ");
         year = stdin.nextInt();
 
-        System.out.print("Would you like to participate in extracurricular activities? (y/n). (Press enter to exit): ");
-        String x = stdin.next();
-        if (x.equals("y")) {
-            classes.addAll(new ExtraCurricular().getSelectedActivities());
+        System.out.print("Would you like to participate in extracurricular activities? (y/n): ");
+        if (stdin.next().equals("y")) {
+            classesTaking.addAll(ExtraCurricular.addExtraCurricular());
         }
 
-        setClasses();
+        ++numberOfStudents;
 
+        setClasses();
         setStudentID();
     }
 
-    private void setStudentID() {
-        studentNumber++;
-        studentID = studentNumber;
-    }
-
-    public long getStudentID() {
-        return studentID;
-    }
-
-
+    /**
+     * Initially populates the student's courses based on the year level. Called inside the Student constructor only.
+     */
     private void setClasses() {
-        System.out.println("How many courses do you want to take");
+        Scanner stdin = new Scanner(System.in);
+        System.out.print("How many courses do you want to take: ");
         int take = stdin.nextInt();
         int count = 0;
         String course;
@@ -77,7 +80,7 @@ public class Student {
                 System.out.println("The following first year courses are available: COMP120, COMP125, COMP150, CMNS152, COMP155");
                 course = stdin.next();
                 stdin.nextLine();
-                classes.add(course);
+                classesTaking.add(course);
                 count++;
             }
         }
@@ -86,7 +89,7 @@ public class Student {
                 System.out.println("The following second year courses are available: CMNS230, COMP251, COMP256");
                 course = stdin.next();
                 stdin.nextLine();
-                classes.add(course);
+                classesTaking.add(course);
                 count++;
             }
         }
@@ -95,7 +98,7 @@ public class Student {
                 System.out.println("The following third year courses are available: COMP310, COMP320, MATH331, COMP354");
                 course = stdin.next();
                 stdin.nextLine();
-                classes.add(course);
+                classesTaking.add(course);
                 count++;
             }
         }
@@ -104,42 +107,104 @@ public class Student {
                 System.out.println("The following fourth year courses are available: COMP420, COMP430, COMP450, COMP454");
                 course = stdin.next();
                 stdin.nextLine();
-                classes.add(course);
+                classesTaking.add(course);
                 count++;
             }
         }
     }
 
+    /**
+     *
+     */
     public void remove() {
-        classes = new AddRemove(this).removeCourse();
+        classesTaking = AddRemove.removeCourse(this);
     }
 
+    /**
+     *
+     */
     public void add() {
-        classes = new AddRemove(this).addCourse();
+        classesTaking = AddRemove.addCourse(this);
     }
 
+    /**
+     * Adds one to the static studentNumber field and stores it to the studentID field.
+     */
+    private void setStudentID() {
+        studentID = ++studentNumber;
+    }
+
+    /**
+     * Gets the ArrayList of the student's courses.
+     * @return Student's courses.
+     */
+    public ArrayList<String> getCourses() {
+        return classesTaking;
+    }
+
+    /**
+     * Gets the name of the student.
+     * @return Name of student.
+     */
     public String getName() {
         return name;
     }
 
-    public String getStudentDOB() {
-        return "DOB format: MMDDYYYY\n" + MonthofB + " " + DayofB + " " + YearofB;
-    }
-
+    /**
+     * Gets the address of the student.
+     * @return Address of student.
+     */
     public String getAddress() {
         return address;
     }
 
-    public long getPhone() {
-        return phoneNum;
-    }
-
-    public String email() {
+    /**
+     * Gets the email of the student.
+     * @return Email of the student.
+     */
+    public String getEmail() {
         return email;
     }
 
-    public ArrayList<String> getClasses() {
-        return classes;
+    /**
+     * Gets the phone number of the student.
+     * @return Phone number of student.
+     */
+    public long getPhoneNum() {
+        return phoneNum;
+    }
+
+    /**
+     * Gets the Date of birth of the student.
+     * @return Date of birth of the student.
+     */
+    public String getStudentDOB() {
+        return dayofB + monthofB + yearofB + "";
+    }
+
+    /**
+     * Gets the Student ID.
+     * @return The unique ID assigned to each Student instance.
+     */
+    public long getStudentID() {
+        return studentID;
+    }
+
+    /**
+     * Gets the number of students.
+     * @return The number of students.
+     */
+    public int getNumberOfStudents() {
+        return numberOfStudents;
+    }
+
+    /**
+     * Student class toString method override.
+     * @return Student information.
+     */
+    public String toString() {
+        return this.getClass().getName() + "[" + name + "," + address + ", " + email + ", " + phoneNum + ", " + dayofB +  ", " + monthofB + ", " + yearofB +
+                ", " + year + ", " + studentID + "]";
     }
 }
 
