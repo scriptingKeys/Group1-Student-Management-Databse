@@ -9,6 +9,9 @@ public class Student implements SchoolMember {
     private int dayofB, monthofB, yearofB;
     private long phoneNum;
     private int year;
+    /**
+     * An ArrayList of the classes the student is taking.
+     */
     private ArrayList<String> classesTaking = new ArrayList<>();
 
     /**
@@ -16,10 +19,13 @@ public class Student implements SchoolMember {
      */
     private long studentID;
     /**
-     * Is the counter to determine the studentID
+     * The counter to determine the studentID
      */
     private static long studentNumber = 1000000000;
 
+    /**
+     * Number of students
+     */
     private static int numberOfStudents;
 
     /**
@@ -179,7 +185,7 @@ public class Student implements SchoolMember {
      * @return Date of birth of the student.
      */
     public String getStudentDOB() {
-        return dayofB + monthofB + yearofB + "";
+        return dayofB + "-" +  monthofB + "-" +  yearofB + "";
     }
 
     /**
@@ -203,8 +209,8 @@ public class Student implements SchoolMember {
      * @return Student information.
      */
     public String toString() {
-        return this.getClass().getName() + "[" + name + "," + address + ", " + email + ", " + phoneNum + ", " + dayofB +  ", " + monthofB + ", " + yearofB +
-                ", " + year + ", " + studentID + "]";
+        return this.getClass().getName() + "[" + name + "," + address + ", " + email + ", " + phoneNum + ", " + dayofB + "-" + monthofB + "-" + yearofB +
+                ", Year of study: " + year + ", Student ID: " + studentID + "List of classes: " + classesTaking + "]";
     }
 }
 
