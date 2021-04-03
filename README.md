@@ -1,2 +1,4 @@
 
-Class project for COMP155
+Student Database Management
+
+by: George Simbajon, Zachary Funk, Kevin Tao, Mike Przeczek
