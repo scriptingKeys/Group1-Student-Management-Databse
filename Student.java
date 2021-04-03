@@ -3,12 +3,23 @@ import java.util.*;
 /**
  * Represents a Student
  */
-public class Student extends SchoolMember {
+public class Student implements SchoolMember {
 
     private String name, email, address;
     private int dayofB, monthofB, yearofB;
     private long phoneNum;
     private int year;
+
+    private String[][] listOfClasses = {
+            {"COMP120", "COMP125", "COMP150", "COMP152", "COMP155"},        // First year
+            {"COMP230", "COMP251", "COMP256"},                              // Second year
+            {"COMP310", "COMP320", "COMP331", "COMP354"},                   // Third year
+            {"COMP420", "COMP430", "COMP450", "COMP454"}                    // Fourth year
+    };
+
+    /**
+     * An ArrayList of the classes the student is taking.
+     */
     private ArrayList<String> classesTaking = new ArrayList<>();
 
     /**
@@ -16,10 +27,13 @@ public class Student extends SchoolMember {
      */
     private long studentID;
     /**
-     * Is the counter to determine the studentID
+     * The counter to determine the studentID
      */
-    private static long studentNumber = 1000000000;
+    private static long studentNumber = 1_000_000;
 
+    /**
+     * Number of students
+     */
     private static int numberOfStudents;
 
     /**
@@ -45,24 +59,26 @@ public class Student extends SchoolMember {
         System.out.print("Enter student's month of birth (MM): ");
         monthofB = stdin.nextInt();
 
-        System.out.print("Enter student's year of birth: (YYYY)");
+        System.out.print("Enter student's year of birth (YYYY): ");
         yearofB = stdin.nextInt();
 
         System.out.print("Enter student's phone number: ");
         phoneNum = stdin.nextLong();
-
-        System.out.print("Enter student's year of study: ");
-        year = stdin.nextInt();
 
         System.out.print("Would you like to participate in extracurricular activities? (y/n): ");
         if (stdin.next().equals("y")) {
             classesTaking.addAll(ExtraCurricular.addExtraCurricular());
         }
 
-        ++numberOfStudents;
+        System.out.print("Enter student's year of study: ");
+        year = stdin.nextInt();
 
         setClasses();
         setStudentID();
+
+        ++numberOfStudents;
+
+        System.out.println("\nStudent created");
     }
 
     /**
@@ -77,7 +93,11 @@ public class Student extends SchoolMember {
 
         if (year == 1) {
             while (count < take) {
-                System.out.println("The following first year courses are available: COMP120, COMP125, COMP150, CMNS152, COMP155");
+                System.out.print("The following first year courses are available: ");
+                for(int i = 0 ; i < listOfClasses[year-1].length; i++) {
+                    System.out.print(listOfClasses[year-1][i] + " ");
+                }
+                System.out.print(": ");
                 course = stdin.next();
                 stdin.nextLine();
                 classesTaking.add(course);
@@ -86,7 +106,11 @@ public class Student extends SchoolMember {
         }
         if (year == 2) {
             while (count < take) {
-                System.out.println("The following second year courses are available: CMNS230, COMP251, COMP256");
+                System.out.print("The following second year courses are available: ");
+                for(int i = 0 ; i < listOfClasses[year-1].length; i++) {
+                    System.out.print(listOfClasses[year-1][i] + " ");
+                }
+                System.out.print(": ");
                 course = stdin.next();
                 stdin.nextLine();
                 classesTaking.add(course);
@@ -95,7 +119,11 @@ public class Student extends SchoolMember {
         }
         if (year == 3) {
             while (count < take) {
-                System.out.println("The following third year courses are available: COMP310, COMP320, MATH331, COMP354");
+                System.out.print("The following third year courses are available: ");
+                for(int i = 0 ; i < listOfClasses[year-1].length; i++) {
+                    System.out.print(listOfClasses[year-1][i] + " ");
+                }
+                System.out.print(": ");
                 course = stdin.next();
                 stdin.nextLine();
                 classesTaking.add(course);
@@ -104,7 +132,11 @@ public class Student extends SchoolMember {
         }
         if (year == 4) {
             while (count < take) {
-                System.out.println("The following fourth year courses are available: COMP420, COMP430, COMP450, COMP454");
+                System.out.print("The following fourth year courses are available: ");
+                for(int i = 0 ; i < listOfClasses[year-1].length; i++) {
+                    System.out.print(listOfClasses[year-1][i] + " ");
+                }
+                System.out.print(": ");
                 course = stdin.next();
                 stdin.nextLine();
                 classesTaking.add(course);
@@ -114,14 +146,14 @@ public class Student extends SchoolMember {
     }
 
     /**
-     *
+     * Removes a course from the ArrayList of courses.
      */
     public void remove() {
         classesTaking = AddRemove.removeCourse(this);
     }
 
     /**
-     *
+     * Adds a course to the ArrayList of courses.
      */
     public void add() {
         classesTaking = AddRemove.addCourse(this);
@@ -138,64 +170,64 @@ public class Student extends SchoolMember {
      * Gets the ArrayList of the student's courses.
      * @return Student's courses.
      */
-    public ArrayList<String> getCourses() {
-        return classesTaking;
+    public ArrayList<String> getCourses() { return classesTaking; }
+
+    /**
+     * Gets the available classes.
+     * @return Two-dimensional array containing the available classes.
+     */
+    public String[][] getCoursesAvailable() {
+        return listOfClasses;
     }
 
     /**
      * Gets the name of the student.
      * @return Name of student.
      */
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
     /**
      * Gets the address of the student.
      * @return Address of student.
      */
-    public String getAddress() {
-        return address;
-    }
+    public String getAddress() { return address; }
 
     /**
      * Gets the email of the student.
      * @return Email of the student.
      */
-    public String getEmail() {
-        return email;
-    }
+    public String getEmail() { return email; }
 
     /**
      * Gets the phone number of the student.
      * @return Phone number of student.
      */
-    public long getPhoneNum() {
-        return phoneNum;
-    }
+    public long getPhoneNum() { return phoneNum; }
 
     /**
      * Gets the Date of birth of the student.
      * @return Date of birth of the student.
      */
-    public String getStudentDOB() {
-        return dayofB + monthofB + yearofB + "";
-    }
+    public String getStudentDOB() { return dayofB + "-" +  monthofB + "-" +  yearofB + ""; }
 
     /**
      * Gets the Student ID.
      * @return The unique ID assigned to each Student instance.
      */
-    public long getStudentID() {
-        return studentID;
-    }
+    public long getStudentID() { return studentID; }
 
     /**
      * Gets the number of students.
      * @return The number of students.
      */
-    public int getNumberOfStudents() {
-        return numberOfStudents;
+    public int getNumberOfStudents() { return numberOfStudents; }
+
+    /**
+     * Gets the year of the student.
+     * @return Year of student.
+     */
+    public int getYear() {
+        return year;
     }
 
     /**
@@ -203,8 +235,8 @@ public class Student extends SchoolMember {
      * @return Student information.
      */
     public String toString() {
-        return this.getClass().getName() + "[" + name + "," + address + ", " + email + ", " + phoneNum + ", " + dayofB +  ", " + monthofB + ", " + yearofB +
-                ", " + year + ", " + studentID + "]";
+        return this.getClass().getName() + "[" + name + ", " + address + ", " + email + ", " + phoneNum + ", " + dayofB + "-" + monthofB + "-" + yearofB +
+                ", Year of study: " + year + ", Student ID: " + studentID + ", List of classes: " + classesTaking + "]";
     }
 }
 

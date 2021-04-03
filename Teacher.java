@@ -3,14 +3,14 @@ import java.util.*;
 /**
  * Represents a Teacher.
  */
-public class Teacher extends SchoolMember {
-    private String name, email, address;
-    private long phoneNum;
+public class Teacher implements SchoolMember {
+    protected String name, email, address;
+    protected long phoneNum;
     private ArrayList<String> classesTeaching = new ArrayList<>();
     private static int numberOfTeachers;
 
     /**
-     * Initializes the necessary information of a teacher. Asks the name, address, email, and phone number.
+     * Initializes the necessary information the name, address, email, and phone number.
      */
     public Teacher() {
         Scanner stdin = new Scanner(System.in);
@@ -30,25 +30,25 @@ public class Teacher extends SchoolMember {
         ++numberOfTeachers;
     }
 
+    /**
+     * Adds the ability to remove a class.
+     */
     public void remove() {
         classesTeaching = AddRemove.removeCourse(this);
     }
 
+    /**
+     * Adds the ability to add a class.
+     */
     public void add() {
         classesTeaching = AddRemove.addCourse(this);
     }
 
     /**
-     * Teacher class toString method override.
+     * String representation of the class.
      * @return Teacher information.
      */
     public String toString() {
-        /*return "Name: " + name +
-                "\nAddress: " + address +
-                "\nEmail: " + email +
-                "\nPhone: " + phoneNum +
-         */
-
         return this.getClass().getName() + "[" + name + "," + address + ", " + email + ", " + phoneNum + "]";
     }
 

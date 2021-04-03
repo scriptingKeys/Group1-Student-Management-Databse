@@ -19,7 +19,7 @@ public class ExtraCurricular {
             System.out.println(activity);
         }
 
-        System.out.println("Select the ones you would like to join: ");
+        System.out.println("Type the activity you would like to join: ");
 
         while(true) {
             System.out.print("Activity (Press enter to exit): ");

@@ -1,21 +1,37 @@
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Represents a school member
  */
-public abstract class SchoolMember {
-    private ArrayList<String> classes = new ArrayList<>();
+public interface SchoolMember {
 
     /**
      * Gets the the courses.
      * @return an ArrayList of type String with the list of classes.
      */
-    public ArrayList<String> getCourses() {
-        return classes;
-    }
+    ArrayList<String> getCourses();
 
-    public abstract String getName();
-    public abstract String getEmail();
-    public abstract String getAddress();
-    public abstract long getPhoneNum();
+    /**
+     * Gets the name of a school member.
+     * @return Name of a school member.
+     */
+    String getName();
+
+    /**
+     * Gets the email of a school member.
+     * @return Email of a school member.
+     */
+    String getEmail();
+
+    /**
+     * Gets the address a school member.
+     * @return Address of a school member.
+     */
+    String getAddress();
+
+    /**
+     * Gets the phone of a school member.
+     * @return Phone number.
+     */
+    long getPhoneNum();
 }

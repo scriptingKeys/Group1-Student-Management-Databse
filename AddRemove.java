@@ -13,15 +13,28 @@ public class AddRemove {
      */
     public static ArrayList<String> addCourse(SchoolMember member) {
         ArrayList<String> courses = member.getCourses();
+        try {
+            Student student = (Student) member;
+            String[][] availableCourses = student.getCoursesAvailable();
+            int year = student.getYear();
+            System.out.print("Available courses: ");
+            for(int i = 0 ; i < availableCourses[year-1].length; i++) {
+                System.out.print(availableCourses[year-1][i] + " ");
+            }
+            System.out.println();
+        }
+        catch(ClassCastException ignored) { }
 
         String ans;
         do {
-            System.out.print("Enter course you would like to add: ");
+            System.out.print("Type the name of the course you would like to add: ");
             courses.add(stdin.next());
-            System.out.print("Would you still like to add a course? (y/n): ");
+            System.out.print("Would you like to add another course? (y/n): ");
             ans = stdin.next();
-            if(ans.equals("n"))
+            if(ans.equals("n")) {
+                System.out.println("\nCourses updated");
                 break;
+            }
         } while(ans.equals("y"));
 
         return courses;
@@ -37,12 +50,15 @@ public class AddRemove {
 
         String ans;
         do {
-            System.out.print("Enter course you would like to remove (Staring from index 0): ");
+            System.out.println("Courses you are taking: " + courses);
+            System.out.print("Enter course you would like to remove (Staring at index 0): ");
             courses.remove(stdin.nextInt());
-            System.out.println("Would you still like to remove a course? (y/n)");
+            System.out.print("Would you like to remove another course? (y/n): ");
             ans = stdin.next();
-            if(ans.equals("n"))
+            if(ans.equals("n")) {
+                System.out.println("\nCourse updated");
                 break;
+            }
         } while(ans.equals("y"));
 
         return courses;
